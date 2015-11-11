@@ -7,6 +7,6 @@ Address=192.168.9.232,4304
 Network=DBMSSOCN
 DATABASE=mentor
 WSID=FASB-200
-APP=Microsoft® Windows® Operating System
+APP=MicrosoftÂ® WindowsÂ® Operating System
 SERVER=192.168.9.232
 Description=conexao para mentor
