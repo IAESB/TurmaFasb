@@ -1,0 +1,4 @@
+build/*
+xdk
+CMakeLists.txt.user*
+*.bak

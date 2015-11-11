@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PromotionsDay</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/chart.min.js"></script>
+    <script src="js/enviaRecebeServidor.js"></script>
+    <script src="js/index.js"></script>
+    <script id="panel-init">
+        $( "body>[data-role='panel']" ).panel();
+    </script>
+</head>
+<body>    
+    <div data-role="page" id="main">
+        <div data-role="header" data-position="fixed">
+            <h1>TurmaFasb</h1>		
+            <a href="#menuIndex" data-role="button" data-icon="menu" data-iconpos="notext">Menu</a>
+        </div><!-- /header -->
+        <div role="main" class="ui-content jqm-content jqm-fullwidth"> 
+            <div class="caixaRedimento">
+                <label>Redimento medio no semestro:</label>
+                <canvas id="graficoGeral" style="width:100%;"></canvas>
+                <div id="legendaGrafico" class="chart-legend">
+                    - Você<br/>
+                    - Turma
+                </div>
+            </div>
+		</div><!-- /content -->
+        <div data-role="panel" id="menuIndex" data-position="left" data-display="overlay" data-theme="a">
+            <a data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-menu ui-btn-icon-notext ui-btn-inline ui-btn-right">Close panel</a>
+            <h3>Materias Matriculado</h3>
+            <ul data-role="listview" data-inset="true" class="ui-alt-icon" id="menuMaterias">
+                <li><a href="materia.html?id=1" rel="external">Materia1</a></li>
+                <li><a href="materia.html?id=2" rel="external">Materia2</a></li>
+                <li><a href="materia.html?id=3" rel="external">Materia3</a></li>
+                <li><a href="materia.html?id=4" rel="external">Materia4</a></li>
+                <li><a href="materia.html?id=5" rel="external">Materia5</a></li>
+                <li><a href="materia.html?id=6" rel="external">Materia6</a></li>
+            </ul>
+        </div><!-- /menu -->
+    </div><!-- /page -->
+</body>
+</html>

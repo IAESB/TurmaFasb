@@ -1,0 +1,51 @@
+
+.file{
+    float: left;
+}
+
+.add{
+    display: none;
+}
+
+.erro{
+    display: none;
+}
+
+.chart-legend li span{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+}
+
+.avatar{    
+    border-radius: 3em;
+    max-height: 6em;
+    max-width: 6em;
+}
+
+
+.usuario label {
+    text-align: center;
+    font-size: 0.7em;
+    margin-bottom: -2;
+}
+
+.usuario {
+    float:left;
+    margin: 0.5em;
+    max-height: em;
+    max-width: em;
+}
+
+.recado {
+    min-height: 9em;
+    margin-bottom: 1em;
+    padding: 0.3em;
+    background-color: cornsilk;
+    border-top-left-radius: 3em;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3em;
+    border-bottom-left-radius: 0;
+    box-shadow: 2px 2px 15px #888888;
+}

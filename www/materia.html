@@ -1,0 +1,116 @@
+  <html>
+<head>
+    <title>PromotionsDay</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/chart.min.js"></script>
+    <script src="dist/ckeditor/ckeditor.js"></script>
+    <script src="js/materia.js"></script>
+</head>
+<body>  
+    <div id="materia" data-role="page">
+        <div data-role="header" data-position="fixed">
+            <h1>Materia</h1>		
+            <a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Inicio</a>
+        </div><!-- /header -->
+        <div role="main" class="ui-content jqm-content jqm-fullwidth"> 
+            <div class="caixaRedimento">
+                <label>Notas no semestro:</label>
+                <canvas id="graficoMateria" style="width:100%;"></canvas>
+                <div id="legendaGrafico" class="chart-legend">
+                    - Erro no carregamento do grafico<br/>
+                </div>
+            </div>
+            <a href="#recados" class="ui-btn ui-btn-inline ui-icon-mail ui-btn-icon-top ui-btn-b">Recados</a>
+            <a href="#arquivos" class="ui-btn ui-btn-inline ui-icon-grid ui-btn-icon-top ui-btn-b">Aquivos</a>
+        </div><!-- /content -->
+    </div><!-- /page -->
+    <div id="recados" data-role="page" data-position="fixed">
+        <div data-role="header">
+            <a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Voltar</a>
+            <h1>Recados</h1>		
+            <a class="btAdd" data-icon="plus" data-rel="button" data-iconpos="notext">Adicionar</a>
+        </div><!-- /header -->
+        <div role="main" class="ui-content jqm-content jqm-fullwidth">
+            <div class="add">
+                <form action="recado/save" method="POST" id="formAddRecado" data-ajax="false">
+                    <textarea name="texto" id="texto" rows="10" cols="80" placeholder="Digite seu recado aqui. Em seguida clique no botão 'Enviar'.">
+                    </textarea>
+                    <button class="ui-btn-b">Enviar</button>
+                </form>
+            </div>
+            <div class="mural">
+                <div class="recado">
+                    <div class="usuario">
+                        <img class="avatar" src="imagens/avatar/user1.jpg">
+                        <label class="usuarioNome">Fulano</label>
+                        <label class="recadoData">25/01/2016</label>
+                    </div>
+                    <div class="texto">
+                        <h2>Titulo</h2>
+                        <p>Louren spectus lord serts csa dlsss abaf tucans is block venuza sporios start.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse accumsan blandit fermentum. Pellentesque cursus mauris purus, auctor commodo mi ullamcorper nec. Donec semper mattis eros, nec condimentum ante sollicitudin quis. Etiam orci sem, porttitor ut tellus nec, blandit posuere urna. Proin a arcu non lacus pretium faucibus. Aliquam sed est porttitor, ullamcorper urna nec, vehicula lorem. Cras porttitor est lorem, non venenatis diam convallis congue.</p>
+                    </div>
+                </div>
+                <div class="recado">
+                    <div class="usuario">
+                        <img class="avatar" src="imagens/avatar/user2.jpg">
+                        <label class="usuarioNome">Beotrano</label>
+                        <label class="recadoData">25/01/2016</label>
+                    </div>
+                    <div class="texto">
+                        <h2>Meu Texto</h2>
+                        <p>Louren spectus lord serts csa dlsss abaf tucans is block venuza sporios start.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse accumsan blandit fermentum. Pellentesque cursus mauris purus, auctor commodo mi ullamcorper nec. Donec semper mattis eros, nec condimentum ante sollicitudin quis. Etiam orci sem, porttitor ut tellus nec, blandit posuere urna. Proin a arcu non lacus pretium faucibus. Aliquam sed est porttitor, ullamcorper urna nec, vehicula lorem. Cras porttitor est lorem, non venenatis diam convallis congue.</p>
+                    </div>
+                </div>
+                <div class="recado">
+                    <div class="usuario">
+                        <img class="avatar" src="imagens/avatar/user3.jpg">
+                        <label class="usuarioNome">Cicrano</label>
+                        <label class="recadoData">25/01/2016</label>
+                    </div>
+                    <div class="texto">
+                        <h2>Recadinho</h2>
+                        <p>Louren spectus lord serts csa, non venenatis diam convallis congue.</p>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /content -->
+    </div><!-- /page -->    
+    <div id="arquivos" data-role="page" data-position="fixed">
+        <div data-role="header">
+            <a href="#" data-icon="back" data-rel="back" data-iconpos="notext">Voltar</a>
+            <h1>Arquivos</h1>		
+            <a class="btAdd" data-icon="plus" data-rel="button" data-iconpos="notext">Adicionar</a>
+        </div><!-- /header -->
+        <div role="main" class="ui-content jqm-content jqm-fullwidth">
+            <div class="add">
+                <form action="arquivo/save" method="POST" id="formAddRecado" data-ajax="false">
+                    <input type="file" name="arquivo"/>
+                    <button class="ui-btn-b">Enviar</button>
+                </form>
+            </div>
+            <div class="root">
+                <div class="file">
+                    <img class="fileIcon" src="imagens/mimetypes/application-msword.png">
+                    <label class="fileName">Arquivo 1.doc</label>
+                    <label class="fileDate">20/11/2016</label>
+                </div>
+                <div class="file">
+                    <img class="fileIcon" src="imagens/mimetypes/application-pdf.png">
+                    <label class="fileName">Arquivo 2.pdf</label>
+                    <label class="fileDate">20/12/2016</label>
+                </div>
+                <div class="file">
+                    <img class="fileIcon" src="imagens/mimetypes/application-msword.png">
+                    <label class="fileName">Arquivo 1.doc</label>
+                    <label class="fileDate">20/11/2016</label>
+                </div>
+            </div>
+        </div><!-- /content -->
+    </div><!-- /page -->    
+</body>
+</html>
