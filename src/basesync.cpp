@@ -10,7 +10,7 @@ void BaseSync::init()
 {
     int ano = 2015;
     int semestre = 2;
-    soci::rowset<row> rs = 	odbc.prepare << "SELECT DISTINCT "
+    soci::rowset<row> set = 	odbc.prepare << "SELECT DISTINCT "
             "MD_ANOMAT,MD_SEQMAT,CR_CODCUR, CR_NOMCUR, CR_HABILI, MD_FASDIS, DI_CODDIS, DI_DISTEL, DI_DESDIS,PF_CODPRO, PF_NOMPRO, MD_CODTUR, MD_CODGRA, AL_ALUTEL, AL_NOMALU "
             "FROM "
                 "TB_CURSO, "
@@ -31,9 +31,32 @@ void BaseSync::init()
                 "AND MD_CODRES <> 16 "
             "ORDER BY "
                 "MD_ANOMAT,MD_SEQMAT,MD_CODTUR, AL_NOMALU ";
+    for(soci::row& row: set)
+    {
+        insertAluno(row);
+        insertProfessor(row);
+        insertTurma(row);
+    }
 }
 
 BaseSync::~BaseSync()
+{
+
+}
+
+void BaseSync::insertAluno(soci::row &row)
+{
+    Usuario aluno;
+    aluno.setMatricula(row.get<string>("AL_ALUTEL"));
+    aluno.setNome(row.get<string>("AL_NOMALU"));
+}
+
+void BaseSync::insertProfessor(soci::row &row)
+{
+
+}
+
+void BaseSync::insertTurma(soci::row &row)
 {
 
 }

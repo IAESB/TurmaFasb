@@ -2,7 +2,6 @@
 #include <boost/program_options.hpp>
 #include <thread>
 #include "optionsargs.h"
-#include "basesync.h"
 #include "servermanager.h"
 
 using namespace std;
