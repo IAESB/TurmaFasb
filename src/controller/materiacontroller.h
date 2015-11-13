@@ -3,7 +3,7 @@
 
 #include "controllerbase.h"
 #include "model/materiamodel.h"
-#include <jsoncpp/json/json.h>
+#include <json/json.h>
 
 class MateriaController : public ControllerBase
 {

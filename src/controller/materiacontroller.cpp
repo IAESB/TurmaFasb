@@ -1,6 +1,6 @@
 #include "materiacontroller.h"
 #include <boost/lexical_cast.hpp>
-#include <jsoncpp/json/json.h>
+#include <json/json.h>
 
 MateriaController::MateriaController()
 {
