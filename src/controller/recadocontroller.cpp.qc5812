@@ -1,0 +1,42 @@
+#include "recadocontroller.h"
+
+RecadoController::RecadoController()
+{
+
+}
+
+void RecadoController::save(Request &request, StreamResponse &response)
+{
+    Json::Value result;
+    result["operation"] = "recado_save";
+    UsuarioPtr usuario = getSession(request, response).get<UsuarioPtr>("usuario");
+    if(usuario){
+        Recado recado = request2recado(request);
+        result["success"] = true;
+    }else{
+        result["success"] = false;
+    }
+
+    response << result;
+}
+
+RecadoController::~RecadoController()
+{
+
+}
+
+void RecadoController::setup()
+{
+    addRoute("POST", "/recado/save", RecadoController, save);
+}
+
+Recado RecadoController::request2recado(Request &request)
+{
+    time_t time = time(NULL);
+    Recado recado;
+    recado.setTexto(request.get("texto"));
+    recado.setData(*localtime(time));
+
+    return recado;
+}
+

@@ -15,7 +15,7 @@ class Usuario
 {
 	int id; //key: PRI
 	std::string nome;
-	std::string email;
+	std::string login;
 	std::string senha;
 	std::string matricula;
 	std::string foto;
@@ -27,8 +27,8 @@ public:
 	void setId(int value);
 	std::string getNome() const;
 	void setNome(std::string value);
-	std::string getEmail() const;
-	void setEmail(std::string value);
+	std::string getLogin() const;
+	void setLogin(std::string value);
 	std::string getSenha() const;
 	void setSenha(std::string value);
 	std::string getMatricula() const;

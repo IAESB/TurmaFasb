@@ -46,8 +46,8 @@ typedef values base_type;
 		if (v.get_indicator("Nota_valor") != i_null){
 			p.setValor( v.template get<double>("Nota_valor" ) );
 		}
-		if (v.get_indicator("Nota_descicao") != i_null){
-			p.setDescicao( v.template get<std::string>("Nota_descicao" ) );
+		if (v.get_indicator("Nota_descricao") != i_null){
+			p.setDescricao( v.template get<std::string>("Nota_descricao" ) );
 		}
 	}
 	static void to_base(const Nota & p, values & v, indicator & ind)
@@ -62,7 +62,7 @@ typedef values base_type;
 		else
 			v.set( "Nota_usuario", NULL, i_null);
 		v.set( "Nota_valor", p.getValor() );
-		v.set( "Nota_descicao", p.getDescicao() );
+		v.set( "Nota_descricao", p.getDescricao() );
 		ind = i_ok;
 	}
 };

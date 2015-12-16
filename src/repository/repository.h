@@ -2,22 +2,24 @@
 #define REPOSITORY_H
 #include <soci/soci.h>
 #include <typeinfo>
+#include "arquivorepository.h"
 #include "materiarepository.h"
-#include "materiahasrecadorepository.h"
 #include "materiahasusuariorepository.h"
 #include "notarepository.h"
 #include "recadorepository.h"
+#include "recadohasmateriarepository.h"
 #include "recadohasusuariorepository.h"
 #include "usuariorepository.h"
 
 class Repository
 {
 	soci::session dataBase;
+	ArquivoRepository arquivo;
 	MateriaRepository materia;
-	MateriaHasRecadoRepository materiahasrecado;
 	MateriaHasUsuarioRepository materiahasusuario;
 	NotaRepository nota;
 	RecadoRepository recado;
+	RecadoHasMateriaRepository recadohasmateria;
 	RecadoHasUsuarioRepository recadohasusuario;
 	UsuarioRepository usuario;
 public:

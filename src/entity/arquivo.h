@@ -1,5 +1,5 @@
-#ifndef NOTA_H
-#define NOTA_H
+#ifndef ARQUIVO_H
+#define ARQUIVO_H
 
 #include <iostream>
 #include <memory>
@@ -9,33 +9,33 @@
 
 using namespace std;
 
-class Nota;
-typedef shared_ptr<Nota> NotaPtr;
-typedef vector<NotaPtr> NotaList;
+class Arquivo;
+typedef shared_ptr<Arquivo> ArquivoPtr;
+typedef vector<ArquivoPtr> ArquivoList;
 
-class Nota
+class Arquivo
 {
 	int id; //key: PRI
+	std::string path;
+	tm data;
 	MateriaPtr materia; //key: MUL
 	UsuarioPtr usuario; //key: MUL
-	double valor;
-	std::string descricao;
 public:
-	Nota();
-	Nota(int id);
+	Arquivo();
+	Arquivo(int id);
 	void init();
 	int getId() const;
 	void setId(int value);
+	std::string getPath() const;
+	void setPath(std::string value);
+	tm getData() const;
+	void setData(tm value);
 	MateriaPtr getMateria() const;
 	void setMateria(MateriaPtr value);
 	UsuarioPtr getUsuario() const;
 	void setUsuario(UsuarioPtr value);
-	double getValor() const;
-	void setValor(double value);
-	std::string getDescricao() const;
-	void setDescricao(std::string value);
 };
 
 
 
-#endif // NOTA_H
+#endif // ARQUIVO_H

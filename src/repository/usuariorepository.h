@@ -36,8 +36,8 @@ typedef values base_type;
 		if (v.get_indicator("Usuario_nome") != i_null){
 			p.setNome( v.template get<std::string>("Usuario_nome" ) );
 		}
-		if (v.get_indicator("Usuario_email") != i_null){
-			p.setEmail( v.template get<std::string>("Usuario_email" ) );
+		if (v.get_indicator("Usuario_login") != i_null){
+			p.setLogin( v.template get<std::string>("Usuario_login" ) );
 		}
 		if (v.get_indicator("Usuario_senha") != i_null){
 			p.setSenha( v.template get<std::string>("Usuario_senha" ) );
@@ -53,7 +53,7 @@ typedef values base_type;
 	{
 		v.set( "Usuario_id", p.getId() );
 		v.set( "Usuario_nome", p.getNome() );
-		v.set( "Usuario_email", p.getEmail() );
+		v.set( "Usuario_login", p.getLogin() );
 		v.set( "Usuario_senha", p.getSenha() );
 		v.set( "Usuario_matricula", p.getMatricula() );
 		v.set( "Usuario_foto", p.getFoto() );

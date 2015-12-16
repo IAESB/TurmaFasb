@@ -1,5 +1,4 @@
 #include "recadorepository.h"
-#include "util.hpp"
 RecadoRepository::RecadoRepository(soci::session& db) : dataBase(db)
 {
 }
@@ -8,9 +7,9 @@ RecadoPtr RecadoRepository::select(const Recado& obj)
 {
 	soci::row row;
 	RecadoPtr recado(new Recado);
-	dataBase << "SELECT  recado.id as Recado_id, recado.texto as Recado_texto, recado.data as Recado_data"
+	dataBase << "SELECT  recado.id as Recado_id, recado.texto as Recado_texto, recado.data as Recado_data, recado.recado_id as Recado_recado"
 	" FROM recado "
-	"WHERE recado.id = :Recado_id", into(row), use(obj);
+	"WHERE recado.id = :Recado_id AND recado.recado_id = :Recado_recado", into(row), use(obj);
 	if(!dataBase.got_data())
 		recado.reset();
 	else
@@ -19,7 +18,7 @@ RecadoPtr RecadoRepository::select(const Recado& obj)
 }
 RecadoList RecadoRepository::select(const string& where)
 {
-	soci::rowset<row> rs = 	dataBase.prepare << "SELECT  recado.id as Recado_id, recado.texto as Recado_texto, recado.data as Recado_data "
+	soci::rowset<row> rs = 	dataBase.prepare << "SELECT  recado.id as Recado_id, recado.texto as Recado_texto, recado.data as Recado_data, recado.recado_id as Recado_recado "
 	" FROM recado" 
 	<< (where.size()?" WHERE "+where:"");
 	RecadoList recadoList;
@@ -34,8 +33,8 @@ RecadoList RecadoRepository::select(const string& where)
 
 int RecadoRepository::insert(const Recado& recado)
 {
-	dataBase << "insert into recado(id, texto, data)\
-values(:Recado_id, :Recado_texto, :Recado_data)", use(recado);
+	dataBase << "insert into recado(id, texto, data, recado_id)\
+values(:Recado_id, :Recado_texto, :Recado_data, :Recado_recado)", use(recado);
 	int id=0;
 	dataBase << "SELECT LAST_INSERT_ID()", soci::into(id);
 	return id;
@@ -43,16 +42,16 @@ values(:Recado_id, :Recado_texto, :Recado_data)", use(recado);
 
 void RecadoRepository::remove(const Recado& recado)
 {
-	dataBase << "DELETE from recado WHERE id=:Recado_id", use(recado);
+	dataBase << "DELETE from recado WHERE id=:Recado_id AND recado_id=:Recado_recado", use(recado);
 }
 
 void RecadoRepository::update(const Recado& recado)
 {
-	dataBase << "update recado set texto=:Recado_texto, data=:Recado_data WHERE id=:Recado_id", use(recado);
+	dataBase << "update recado set texto=:Recado_texto, data=:Recado_data, recado_id=:Recado_recado WHERE id=:Recado_id", use(recado);
 }
 
 void RecadoRepository::update(const Recado& oldObj, const Recado& newObj)
 {
-	dataBase << "update recado set texto=:Recado_texto, data=:Recado_data WHERE id='"<<oldObj.getId()<<"\'", use(newObj);
+	dataBase << "update recado set texto=:Recado_texto, data=:Recado_data, recado_id=:Recado_recado WHERE id='"<<oldObj.getId()<<"\'", use(newObj);
 }
 

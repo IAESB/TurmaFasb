@@ -1,5 +1,5 @@
 #include "logincontroller.h"
-#include <jsoncpp/json/json.h>
+#include <json/json.h>
 
 LoginController::LoginController(){}
 
@@ -15,9 +15,14 @@ void LoginController::login(Request &request, StreamResponse &response)
 {
     Json::Value value;
     value["operation"] = "login";
-    UsuarioPtr usuario = model.login(request.get("email"), request.get("senha"));
+    UsuarioPtr usuario = model.login(request.get("login"), request.get("senha"));
     if(usuario){
         getSession(request, response).setValue("usuario", usuario);
+        value["usuario"]["id"] = usuario->getId();
+        value["usuario"]["nome"] = usuario->getNome();
+        value["usuario"]["foto"] = usuario->getFoto();
+        value["usuario"]["login"] = usuario->getLogin();
+        value["usuario"]["senha"] = usuario->getSenha();
         value["success"] = true;
     }
     else{

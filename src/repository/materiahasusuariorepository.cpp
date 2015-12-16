@@ -1,5 +1,4 @@
 #include "materiahasusuariorepository.h"
-#include "util.hpp"
 MateriaHasUsuarioRepository::MateriaHasUsuarioRepository(soci::session& db) : dataBase(db)
 {
 }
@@ -8,10 +7,10 @@ MateriaHasUsuarioPtr MateriaHasUsuarioRepository::select(const MateriaHasUsuario
 {
 	soci::row row;
 	MateriaHasUsuarioPtr materiahasusuario(new MateriaHasUsuario);
-	dataBase << "SELECT  materia_has_usuario.materia_id as MateriaHasUsuario_materia, materia.id as Materia_id, materia.nome as Materia_nome, materia.codigo as Materia_codigo, materia.descricao as Materia_descricao, materia.usuario_id as Materia_usuario, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.email as Usuario_email, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto, materia_has_usuario.usuario_id as MateriaHasUsuario_usuario"
+	dataBase << "SELECT  materia_has_usuario.materia_id as MateriaHasUsuario_materia, materia.id as Materia_id, materia.nome as Materia_nome, materia.codigo as Materia_codigo, materia.descricao as Materia_descricao, materia.ano as Materia_ano, materia.semestre as Materia_semestre, materia.curso as Materia_curso, materia.usuario_id as Materia_usuario, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.login as Usuario_login, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto, materia_has_usuario.usuario_id as MateriaHasUsuario_usuario"
 	" FROM materia_has_usuario "
 	"LEFT OUTER JOIN materia ON(materia_has_usuario.materia_id=materia.id) "
-	"LEFT OUTER JOIN usuario ON(materia.usuario_id=usuario.id) "
+	"LEFT OUTER JOIN usuario ON(materia_has_usuario.usuario_id=usuario.id) "
 	"WHERE materia_has_usuario.materia_id = :MateriaHasUsuario_materia AND materia_has_usuario.usuario_id = :MateriaHasUsuario_usuario", into(row), use(obj);
 	if(!dataBase.got_data())
 		materiahasusuario.reset();
@@ -21,10 +20,10 @@ MateriaHasUsuarioPtr MateriaHasUsuarioRepository::select(const MateriaHasUsuario
 }
 MateriaHasUsuarioList MateriaHasUsuarioRepository::select(const string& where)
 {
-	soci::rowset<row> rs = 	dataBase.prepare << "SELECT  materia_has_usuario.materia_id as MateriaHasUsuario_materia, materia.id as Materia_id, materia.nome as Materia_nome, materia.codigo as Materia_codigo, materia.descricao as Materia_descricao, materia.usuario_id as Materia_usuario, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.email as Usuario_email, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto, materia_has_usuario.usuario_id as MateriaHasUsuario_usuario "
+	soci::rowset<row> rs = 	dataBase.prepare << "SELECT  materia_has_usuario.materia_id as MateriaHasUsuario_materia, materia.id as Materia_id, materia.nome as Materia_nome, materia.codigo as Materia_codigo, materia.descricao as Materia_descricao, materia.ano as Materia_ano, materia.semestre as Materia_semestre, materia.curso as Materia_curso, materia.usuario_id as Materia_usuario, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.login as Usuario_login, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto, materia_has_usuario.usuario_id as MateriaHasUsuario_usuario "
 	" FROM materia_has_usuario "
 	"LEFT OUTER JOIN materia ON(materia_has_usuario.materia_id=materia.id) "
-	"LEFT OUTER JOIN usuario ON(materia.usuario_id=usuario.id)" 
+	"LEFT OUTER JOIN usuario ON(materia_has_usuario.usuario_id=usuario.id)" 
 	<< (where.size()?" WHERE "+where:"");
 	MateriaHasUsuarioList materiahasusuarioList;
 	for(row& r: rs)

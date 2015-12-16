@@ -3,12 +3,10 @@
 Nota::Nota(){
 	init();
 }
-Nota::Nota(int id, MateriaPtr materia, UsuarioPtr usuario)
+Nota::Nota(int id)
 {
 	init();
 	this->id = id;
-	this->materia = materia;
-	this->usuario = usuario;
 }
 
 void Nota::init()
@@ -46,12 +44,12 @@ void Nota::setValor(double value)
 {
 	valor = value;
 }
-std::string Nota::getDescicao() const
+std::string Nota::getDescricao() const
 {
-	return descicao;
+	return descricao;
 }
-void Nota::setDescicao(std::string value)
+void Nota::setDescricao(std::string value)
 {
-	descicao = value;
+	descricao = value;
 }
 

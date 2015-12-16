@@ -37,4 +37,12 @@ void Recado::setData(tm value)
 {
 	data = value;
 }
+RecadoPtr Recado::getRecado() const
+{
+	return recado;
+}
+void Recado::setRecado(RecadoPtr value)
+{
+	recado = value;
+}
 

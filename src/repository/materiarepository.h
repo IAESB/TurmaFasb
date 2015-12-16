@@ -43,6 +43,15 @@ typedef values base_type;
 		if (v.get_indicator("Materia_descricao") != i_null){
 			p.setDescricao( v.template get<std::string>("Materia_descricao" ) );
 		}
+		if (v.get_indicator("Materia_ano") != i_null){
+			p.setAno( v.template get<int>("Materia_ano" ) );
+		}
+		if (v.get_indicator("Materia_semestre") != i_null){
+			p.setSemestre( v.template get<int>("Materia_semestre" ) );
+		}
+		if (v.get_indicator("Materia_curso") != i_null){
+			p.setCurso( v.template get<std::string>("Materia_curso" ) );
+		}
 		if (v.get_indicator("Materia_usuario") != i_null){
 			p.setUsuario( UsuarioPtr( new Usuario(v.template get<int>("Materia_usuario")) ) );
 			type_conversion<Usuario>::from_base(v, i_ok, *p.getUsuario() );
@@ -54,6 +63,9 @@ typedef values base_type;
 		v.set( "Materia_nome", p.getNome() );
 		v.set( "Materia_codigo", p.getCodigo() );
 		v.set( "Materia_descricao", p.getDescricao() );
+		v.set( "Materia_ano", p.getAno() );
+		v.set( "Materia_semestre", p.getSemestre() );
+		v.set( "Materia_curso", p.getCurso() );
 		if( p.getUsuario() )
 			v.set( "Materia_usuario", p.getUsuario()->getId() );
 		else

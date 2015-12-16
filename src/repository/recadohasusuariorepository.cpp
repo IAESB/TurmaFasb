@@ -1,5 +1,4 @@
 #include "recadohasusuariorepository.h"
-#include "util.hpp"
 RecadoHasUsuarioRepository::RecadoHasUsuarioRepository(soci::session& db) : dataBase(db)
 {
 }
@@ -8,7 +7,7 @@ RecadoHasUsuarioPtr RecadoHasUsuarioRepository::select(const RecadoHasUsuario& o
 {
 	soci::row row;
 	RecadoHasUsuarioPtr recadohasusuario(new RecadoHasUsuario);
-	dataBase << "SELECT  recado_has_usuario.recado_id as RecadoHasUsuario_recado, recado.id as Recado_id, recado.texto as Recado_texto, recado.data as Recado_data, recado_has_usuario.remetente_id as RecadoHasUsuario_remetente, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.email as Usuario_email, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto, recado_has_usuario.destinatario_id as RecadoHasUsuario_destinatario"
+	dataBase << "SELECT  recado_has_usuario.recado_id as RecadoHasUsuario_recado, recado.id as Recado_id, recado.texto as Recado_texto, recado.data as Recado_data, recado.recado_id as Recado_recado, recado_has_usuario.remetente_id as RecadoHasUsuario_remetente, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.login as Usuario_login, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto, recado_has_usuario.destinatario_id as RecadoHasUsuario_destinatario"
 	" FROM recado_has_usuario "
 	"LEFT OUTER JOIN recado ON(recado_has_usuario.recado_id=recado.id) "
 	"LEFT OUTER JOIN usuario ON(recado_has_usuario.usuario_id=usuario.id) "
@@ -21,7 +20,7 @@ RecadoHasUsuarioPtr RecadoHasUsuarioRepository::select(const RecadoHasUsuario& o
 }
 RecadoHasUsuarioList RecadoHasUsuarioRepository::select(const string& where)
 {
-	soci::rowset<row> rs = 	dataBase.prepare << "SELECT  recado_has_usuario.recado_id as RecadoHasUsuario_recado, recado.id as Recado_id, recado.texto as Recado_texto, recado.data as Recado_data, recado_has_usuario.remetente_id as RecadoHasUsuario_remetente, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.email as Usuario_email, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto, recado_has_usuario.destinatario_id as RecadoHasUsuario_destinatario "
+	soci::rowset<row> rs = 	dataBase.prepare << "SELECT  recado_has_usuario.recado_id as RecadoHasUsuario_recado, recado.id as Recado_id, recado.texto as Recado_texto, recado.data as Recado_data, recado.recado_id as Recado_recado, recado_has_usuario.remetente_id as RecadoHasUsuario_remetente, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.login as Usuario_login, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto, recado_has_usuario.destinatario_id as RecadoHasUsuario_destinatario "
 	" FROM recado_has_usuario "
 	"LEFT OUTER JOIN recado ON(recado_has_usuario.recado_id=recado.id) "
 	"LEFT OUTER JOIN usuario ON(recado_has_usuario.usuario_id=usuario.id)" 

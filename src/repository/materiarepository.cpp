@@ -1,5 +1,4 @@
 #include "materiarepository.h"
-#include "util.hpp"
 MateriaRepository::MateriaRepository(soci::session& db) : dataBase(db)
 {
 }
@@ -8,7 +7,7 @@ MateriaPtr MateriaRepository::select(const Materia& obj)
 {
 	soci::row row;
 	MateriaPtr materia(new Materia);
-	dataBase << "SELECT  materia.id as Materia_id, materia.nome as Materia_nome, materia.codigo as Materia_codigo, materia.descricao as Materia_descricao, materia.usuario_id as Materia_usuario, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.email as Usuario_email, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto"
+	dataBase << "SELECT  materia.id as Materia_id, materia.nome as Materia_nome, materia.codigo as Materia_codigo, materia.descricao as Materia_descricao, materia.ano as Materia_ano, materia.semestre as Materia_semestre, materia.curso as Materia_curso, materia.usuario_id as Materia_usuario, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.login as Usuario_login, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto"
 	" FROM materia "
 	"LEFT OUTER JOIN usuario ON(materia.usuario_id=usuario.id) "
 	"WHERE materia.id = :Materia_id AND materia.usuario_id = :Materia_usuario", into(row), use(obj);
@@ -20,7 +19,7 @@ MateriaPtr MateriaRepository::select(const Materia& obj)
 }
 MateriaList MateriaRepository::select(const string& where)
 {
-	soci::rowset<row> rs = 	dataBase.prepare << "SELECT  materia.id as Materia_id, materia.nome as Materia_nome, materia.codigo as Materia_codigo, materia.descricao as Materia_descricao, materia.usuario_id as Materia_usuario, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.email as Usuario_email, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto "
+	soci::rowset<row> rs = 	dataBase.prepare << "SELECT  materia.id as Materia_id, materia.nome as Materia_nome, materia.codigo as Materia_codigo, materia.descricao as Materia_descricao, materia.ano as Materia_ano, materia.semestre as Materia_semestre, materia.curso as Materia_curso, materia.usuario_id as Materia_usuario, usuario.id as Usuario_id, usuario.nome as Usuario_nome, usuario.login as Usuario_login, usuario.senha as Usuario_senha, usuario.matricula as Usuario_matricula, usuario.foto as Usuario_foto "
 	" FROM materia "
 	"LEFT OUTER JOIN usuario ON(materia.usuario_id=usuario.id)" 
 	<< (where.size()?" WHERE "+where:"");
@@ -36,8 +35,8 @@ MateriaList MateriaRepository::select(const string& where)
 
 int MateriaRepository::insert(const Materia& materia)
 {
-	dataBase << "insert into materia(id, nome, codigo, descricao, usuario_id)\
-values(:Materia_id, :Materia_nome, :Materia_codigo, :Materia_descricao, :Materia_usuario)", use(materia);
+	dataBase << "insert into materia(id, nome, codigo, descricao, ano, semestre, curso, usuario_id)\
+values(:Materia_id, :Materia_nome, :Materia_codigo, :Materia_descricao, :Materia_ano, :Materia_semestre, :Materia_curso, :Materia_usuario)", use(materia);
 	int id=0;
 	dataBase << "SELECT LAST_INSERT_ID()", soci::into(id);
 	return id;
@@ -50,11 +49,11 @@ void MateriaRepository::remove(const Materia& materia)
 
 void MateriaRepository::update(const Materia& materia)
 {
-	dataBase << "update materia set nome=:Materia_nome, codigo=:Materia_codigo, descricao=:Materia_descricao, usuario_id=:Materia_usuario WHERE id=:Materia_id AND usuario_id=:Materia_usuario", use(materia);
+	dataBase << "update materia set nome=:Materia_nome, codigo=:Materia_codigo, descricao=:Materia_descricao, ano=:Materia_ano, semestre=:Materia_semestre, curso=:Materia_curso, usuario_id=:Materia_usuario WHERE id=:Materia_id", use(materia);
 }
 
 void MateriaRepository::update(const Materia& oldObj, const Materia& newObj)
 {
-	dataBase << "update materia set nome=:Materia_nome, codigo=:Materia_codigo, descricao=:Materia_descricao, usuario_id=:Materia_usuario WHERE id='"<<oldObj.getId()<<"\'' AND usuario_id='"<<oldObj.getUsuario()->getId()<<"\'", use(newObj);
+	dataBase << "update materia set nome=:Materia_nome, codigo=:Materia_codigo, descricao=:Materia_descricao, ano=:Materia_ano, semestre=:Materia_semestre, curso=:Materia_curso, usuario_id=:Materia_usuario WHERE id='"<<oldObj.getId()<<"\'", use(newObj);
 }
 

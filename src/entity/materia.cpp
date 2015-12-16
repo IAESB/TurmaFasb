@@ -44,6 +44,30 @@ void Materia::setDescricao(std::string value)
 {
 	descricao = value;
 }
+int Materia::getAno() const
+{
+	return ano;
+}
+void Materia::setAno(int value)
+{
+	ano = value;
+}
+int Materia::getSemestre() const
+{
+	return semestre;
+}
+void Materia::setSemestre(int value)
+{
+	semestre = value;
+}
+std::string Materia::getCurso() const
+{
+	return curso;
+}
+void Materia::setCurso(std::string value)
+{
+	curso = value;
+}
 UsuarioPtr Materia::getUsuario() const
 {
 	return usuario;

@@ -3,7 +3,7 @@
 
 #include <mongoose/WebController.h>
 #include <mongoose/Server.h>
-#include "util.hpp"
+#include <utilcpp/util.hpp>
 
 using namespace std;
 using namespace Mongoose;

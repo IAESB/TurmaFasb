@@ -1,5 +1,5 @@
-#ifndef MATERIAHASRECADO_H
-#define MATERIAHASRECADO_H
+#ifndef RECADOHASMATERIA_H
+#define RECADOHASMATERIA_H
 
 #include <iostream>
 #include <memory>
@@ -10,18 +10,18 @@
 
 using namespace std;
 
-class MateriaHasRecado;
-typedef shared_ptr<MateriaHasRecado> MateriaHasRecadoPtr;
-typedef vector<MateriaHasRecadoPtr> MateriaHasRecadoList;
+class RecadoHasMateria;
+typedef shared_ptr<RecadoHasMateria> RecadoHasMateriaPtr;
+typedef vector<RecadoHasMateriaPtr> RecadoHasMateriaList;
 
-class MateriaHasRecado
+class RecadoHasMateria
 {
 	MateriaPtr materia; //key: PRI
 	RecadoPtr recado; //key: PRI
 	UsuarioPtr usuario; //key: PRI
 public:
-	MateriaHasRecado();
-	MateriaHasRecado(MateriaPtr materia, RecadoPtr recado, UsuarioPtr usuario);
+	RecadoHasMateria();
+	RecadoHasMateria(MateriaPtr materia, RecadoPtr recado, UsuarioPtr usuario);
 	void init();
 	MateriaPtr getMateria() const;
 	void setMateria(MateriaPtr value);
@@ -33,4 +33,4 @@ public:
 
 
 
-#endif // MATERIAHASRECADO_H
+#endif // RECADOHASMATERIA_H

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include "recado.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ class Recado
 	int id; //key: PRI
 	std::string texto;
 	tm data;
+	RecadoPtr recado; //key: MUL
 public:
 	Recado();
 	Recado(int id);
@@ -26,6 +28,8 @@ public:
 	void setTexto(std::string value);
 	tm getData() const;
 	void setData(tm value);
+	RecadoPtr getRecado() const;
+	void setRecado(RecadoPtr value);
 };
 
 

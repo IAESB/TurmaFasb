@@ -1,5 +1,5 @@
 #include "repository.h"
-Repository::Repository() :materia(dataBase) ,materiahasrecado(dataBase) ,materiahasusuario(dataBase) ,nota(dataBase) ,recado(dataBase) ,recadohasusuario(dataBase) ,usuario(dataBase) 
+Repository::Repository() :arquivo(dataBase) ,materia(dataBase) ,materiahasusuario(dataBase) ,nota(dataBase) ,recado(dataBase) ,recadohasmateria(dataBase) ,recadohasusuario(dataBase) ,usuario(dataBase) 
 {}
 void Repository::open(const std::string& connectStringDataBase)
 {
@@ -7,6 +7,31 @@ void Repository::open(const std::string& connectStringDataBase)
 		dataBase.open(connectStringDataBase);
 	else
 		throw runtime_error("connectStringDataBase is EMPTY, info a url to connect in data base");
+}
+
+template<> ArquivoPtr Repository::select(const Arquivo& obj)
+{
+	return arquivo.select(obj);
+}
+template<> ArquivoList Repository::select(const string& where)
+{
+	return arquivo.select(where);
+}
+template<> int Repository::insert(const Arquivo& obj)
+{
+	return arquivo.insert(obj);
+}
+template<> void Repository::update(const Arquivo& obj)
+{
+	arquivo.update(obj);
+}
+template<> void Repository::update(const Arquivo& oldObj, const Arquivo& newObj)
+{
+	arquivo.update(oldObj, newObj);
+}
+template<> void Repository::remove(const Arquivo& obj)
+{
+	arquivo.remove(obj);
 }
 
 template<> MateriaPtr Repository::select(const Materia& obj)
@@ -32,31 +57,6 @@ template<> void Repository::update(const Materia& oldObj, const Materia& newObj)
 template<> void Repository::remove(const Materia& obj)
 {
 	materia.remove(obj);
-}
-
-template<> MateriaHasRecadoPtr Repository::select(const MateriaHasRecado& obj)
-{
-	return materiahasrecado.select(obj);
-}
-template<> MateriaHasRecadoList Repository::select(const string& where)
-{
-	return materiahasrecado.select(where);
-}
-template<> int Repository::insert(const MateriaHasRecado& obj)
-{
-	return materiahasrecado.insert(obj);
-}
-template<> void Repository::update(const MateriaHasRecado& obj)
-{
-	materiahasrecado.update(obj);
-}
-template<> void Repository::update(const MateriaHasRecado& oldObj, const MateriaHasRecado& newObj)
-{
-	materiahasrecado.update(oldObj, newObj);
-}
-template<> void Repository::remove(const MateriaHasRecado& obj)
-{
-	materiahasrecado.remove(obj);
 }
 
 template<> MateriaHasUsuarioPtr Repository::select(const MateriaHasUsuario& obj)
@@ -132,6 +132,31 @@ template<> void Repository::update(const Recado& oldObj, const Recado& newObj)
 template<> void Repository::remove(const Recado& obj)
 {
 	recado.remove(obj);
+}
+
+template<> RecadoHasMateriaPtr Repository::select(const RecadoHasMateria& obj)
+{
+	return recadohasmateria.select(obj);
+}
+template<> RecadoHasMateriaList Repository::select(const string& where)
+{
+	return recadohasmateria.select(where);
+}
+template<> int Repository::insert(const RecadoHasMateria& obj)
+{
+	return recadohasmateria.insert(obj);
+}
+template<> void Repository::update(const RecadoHasMateria& obj)
+{
+	recadohasmateria.update(obj);
+}
+template<> void Repository::update(const RecadoHasMateria& oldObj, const RecadoHasMateria& newObj)
+{
+	recadohasmateria.update(oldObj, newObj);
+}
+template<> void Repository::remove(const RecadoHasMateria& obj)
+{
+	recadohasmateria.remove(obj);
 }
 
 template<> RecadoHasUsuarioPtr Repository::select(const RecadoHasUsuario& obj)

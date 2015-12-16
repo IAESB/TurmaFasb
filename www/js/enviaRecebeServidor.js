@@ -1,9 +1,19 @@
-function enviaFormAjax(form, callBackSuccess)
+function enviaFormAjax(form, callBackSuccess, isFileUpload)
 {
+    
+    if (typeof(isFileUpload) === "undefined"){ //test do parametro opcional
+        isFileUpload = false;
+    }
+    
     form.submit(function( event ) {     
         var url = form[0].attributes.action.value;
         var method = form[0].method;
-        var formData = $(form).serialize();        
+        var formData;
+        if(isFileUpload){
+            formData = new FormData(form[0]);  
+        }else{
+            formData = form.serialize();        
+        }    
         callBackSuccess(getDadosServidor(url, formData, method));
         return false; // cancel original event to prevent form submitting
     });
@@ -11,8 +21,9 @@ function enviaFormAjax(form, callBackSuccess)
 
 function getDadosServidor(url, parametros, method)
 {
-    if(url.indexOf("http")<0)
-        url = "http://localhost:4567/"+url;
+    if(url.indexOf("http")<0){
+        url = "http://"+window.location.host+"/"+url;
+    }
     
     if (typeof(method) === "undefined"){//test do parametro opcional
         method = 'GET';
@@ -41,4 +52,12 @@ function getDadosServidor(url, parametros, method)
             }
         }); 
     return dados;
+}
+
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }

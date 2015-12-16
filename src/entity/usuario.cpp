@@ -28,13 +28,13 @@ void Usuario::setNome(std::string value)
 {
 	nome = value;
 }
-std::string Usuario::getEmail() const
+std::string Usuario::getLogin() const
 {
-	return email;
+	return login;
 }
-void Usuario::setEmail(std::string value)
+void Usuario::setLogin(std::string value)
 {
-	email = value;
+	login = value;
 }
 std::string Usuario::getSenha() const
 {

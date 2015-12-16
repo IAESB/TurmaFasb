@@ -13,7 +13,7 @@ LoginModel::~LoginModel()
 UsuarioPtr LoginModel::login(string email, string senha)
 {
     UsuarioPtr usuario;
-    UsuarioList usuarios = repository.select<UsuarioList>("email = '"+email+"' AND senha = '"+senha+"'");
+    UsuarioList usuarios = repository.select<UsuarioList>("login = '"+email+"' AND senha = '"+senha+"'");
     if( ! usuarios.empty())
         usuario = usuarios[0];
 
